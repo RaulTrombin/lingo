@@ -1,0 +1,1 @@
+sudo apt-get install -y pkg-config libssl-dev

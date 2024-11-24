@@ -37,3 +37,9 @@ ct2rs = { version = "0.8.5", features = ["ruy"] }
 
 [target.'cfg(target_os = "linux")'.dependencies]
 ct2rs = "0.8.5"
+
+[target.'cfg(target_os = "android")'.dependencies]
+ct2rs = "0.8.5"
+
+[target.aarch64-linux-android]
+pre-build = "./scripts/my-script.sh"
