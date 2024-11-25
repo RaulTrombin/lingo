@@ -5,6 +5,7 @@ use std::{fs, path::PathBuf, time};
 use tauri::{AppHandle, Emitter, Manager, State};
 use tauri_plugin_shell::ShellExt;
 
+#[cfg(not(target_os = "android"))]
 #[tauri::command]
 pub async fn translate(
     language: String,
@@ -23,6 +24,17 @@ pub async fn translate(
     let elapsed = now.elapsed();
     log::info!("Time taken: {:?}", elapsed);
     Ok(res)
+}
+
+
+#[cfg(target_os = "android")]
+#[tauri::command]
+pub async fn translate(
+    _language: String,
+    _text: String,
+    _translator_handle: State<'_, TranslatorHandle>
+) -> Result<Vec<(String, Option<f32>)>> {
+    Err(eyre!("Translation not yet supported on Android"))
 }
 
 #[tauri::command]
